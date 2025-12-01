@@ -79,6 +79,12 @@ function Grid({size} : {size: number;}){
     setCells(nextCells);
   }
 
+  function activateCell(row, col){
+    const nextCells = [...cells];
+    nextCells[row][col] = 1;
+    setCells(nextCells);
+  }
+
   return(
     <div
     className='gap-1 grid'
@@ -100,6 +106,7 @@ function Grid({size} : {size: number;}){
             state={cell}
             canFall={canFall}
             fall={fall}
+            onClick={activateCell}
             />
           );
         })
@@ -114,6 +121,7 @@ function Cell({
   row,
   col,
   fall,
+  onClick,
 } : 
   {
   state: CellProps;
@@ -121,10 +129,10 @@ function Cell({
   col: number;
   canFall: (row, col) => number;
   fall: (row, col) => void;
+  onClick: (row, col) => void;
 }){
   useEffect(() => {
     if(state === 1){
-      console.log(row, col);
       if(canFall(row, col)){
         setTimeout(() => {
           fall(row, col);
@@ -139,6 +147,7 @@ function Cell({
       style={{
         background: state ? 'white' : '',
       }}
+      onClick={() => onClick(row, col)}
     >
     </div>
   );
