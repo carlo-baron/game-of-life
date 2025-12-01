@@ -131,6 +131,7 @@ function Cell({
   fall: (row, col) => void;
   onClick: (row, col) => void;
 }){
+  const [clickCd, setClickCd] = useState<boolean>(false);
   useEffect(() => {
     if(state === 1){
       if(canFall(row, col)){
@@ -141,13 +142,21 @@ function Cell({
     }
   },[state]);
 
+  function handleClick(){
+    if(clickCd) return;
+    onClick(row, col);
+    setClickCd(true);
+
+    setTimeout(() => setClickCd(false), 250);
+  }
+
   return(
     <div 
       className="bg-bluee-500 w-[1rem] aspect-1/1 outline-solid outline-white"
       style={{
         background: state ? 'white' : '',
       }}
-      onClick={() => onClick(row, col)}
+      onClick={handleClick}
     >
     </div>
   );
