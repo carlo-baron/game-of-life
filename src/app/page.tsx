@@ -11,7 +11,7 @@ export default function Home() {
     className='bg-black flex items-center justify-center w-full h-screen'
     >
       <Grid 
-      size={10}
+      size={25}
       />
     </div>
   );
@@ -31,7 +31,6 @@ function Grid({size} : {size: number;}){
         nextCells[i][j] = 0;
       }
     }
-    nextCells[0][0] = 1;
     setCells(nextCells);
   }, [size]);
 
@@ -69,13 +68,25 @@ function Grid({size} : {size: number;}){
   }
 
   function canFall(row, col){
-    return neighbors(row, col)[4] === 0;
+    const neighborCells = neighbors(row, col);
+    return neighborCells[3] === 0 ||
+           neighborCells[4] === 0 ||
+           neighborCells[5] === 0;
   }
 
   function fall(row, col){
     const nextCells = [...cells];
+    const neighborCells = neighbors(row, col);
+    
     nextCells[row][col] = 0;
-    nextCells[row+1][col] = 1;
+    if(neighborCells[4] === 0){
+      nextCells[row+1][col] = 1;
+    }else if(neighborCells[3] === 0){
+      nextCells[row+1][col+1] = 1;
+    }else if(neighborCells[5] === 0){
+      nextCells[row+1][col-1] = 1;
+    }
+
     setCells(nextCells);
   }
 
