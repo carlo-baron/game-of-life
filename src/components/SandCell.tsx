@@ -5,7 +5,7 @@ import {
   useEffect
 } from 'react';
 
-interface CellProps{
+interface SandCellProps{
   state: boolean;
   row: number;
   col: number;
@@ -22,7 +22,7 @@ export default function SandCell({
   fall,
   onClick,
 } : 
-  CellProps
+  SandCellProps
 ){
   const [clickCd, setClickCd] = useState<boolean>(false);
   useEffect(() => {
@@ -45,7 +45,7 @@ export default function SandCell({
 
   return(
     <div 
-      className="bg-bluee-500 w-[1rem] aspect-1/1 outline-solid outline-white"
+      className="w-[1rem] aspect-1/1 outline-solid outline-white"
       style={{
         background: state ? 'white' : '',
       }}

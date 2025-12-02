@@ -47,11 +47,6 @@ export default function SandGrid({size} : {size: number;}){
     return neighborCells;
   }
 
-  function getNeighbor(row, col){
-    const neighborCells = neighbors(row, col);
-    return neighborCells.filter(neighbor => neighbor === 1).length;
-  }
-
   function canFall(row, col){
     const neighborCells = neighbors(row, col);
     return neighborCells[3] === 0 ||
