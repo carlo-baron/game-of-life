@@ -1,6 +1,5 @@
 "use client";
 
-import { JoystickIcon } from 'lucide-react';
 import {
   useState,
   useEffect
@@ -18,13 +17,9 @@ export default function LifeGrid(
   }
 ){
   const [cells, setCells] = useState<number[][]>([]);
-  const [iteration, setIteration] = useState<number>(0);
-
   useEffect(() => {
     if(!play) return;
     const id = setInterval(() => {
-      setIteration(prev => prev+1);
-
       const nextCells = [...cells];
       for(let i = 0; i < size; i++){
         for(let j = 0; j < size; j++){
@@ -94,6 +89,7 @@ export default function LifeGrid(
   }
 
   function activateCell(row, col){
+    if(play) return;
     const nextCells = [...cells];
     const currentState = nextCells[row][col] 
     nextCells[row][col] = currentState == 1 ? 0 : 1;
