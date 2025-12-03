@@ -20,34 +20,33 @@ export default function LifeGrid(
   useEffect(() => {
     if(!play) return;
     const id = setInterval(() => {
-      const nextCells = [...cells];
+      const nextCells = cells.map(row => [...row]);
       for(let i = 0; i < size; i++){
         for(let j = 0; j < size; j++){
           const neighborCells = neighbors(i, j);
           const liveNeighbors = neighborCells.filter(neighbor => neighbor === 1).length;
-          const currentCell = cells[i][j];
+          const currentCell = nextCells[i][j];
 
           if(currentCell === 1){
             if(liveNeighbors <= 1){
-              cells[i][j] = 0;
+              nextCells[i][j] = 0;
             }else if(liveNeighbors <= 3){
-              cells[i][j] = 1;
+              nextCells[i][j] = 1;
             }else{
-              cells[i][j] = 0;
+              nextCells[i][j] = 0;
             }
           }else{
             if(liveNeighbors === 3){
-              cells[i][j] = 1;
+              nextCells[i][j] = 1;
             }
           }
         }
       }
-
       setCells(nextCells);
     }, 100);
 
     return () => clearInterval(id);
-  }, [play]);
+  }, [play, cells]);
 
   useEffect(() => {
     const nextCells: number[][] = [];
@@ -90,7 +89,7 @@ export default function LifeGrid(
 
   function activateCell(row: number, col: number){
     if(play) return;
-    const nextCells = [...cells];
+    const nextCells = cells.map(row => [...row]);
     const currentState = nextCells[row][col] 
     nextCells[row][col] = currentState == 1 ? 0 : 1;
     setCells(nextCells);

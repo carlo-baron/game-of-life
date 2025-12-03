@@ -55,7 +55,7 @@ export default function SandGrid({size} : {size: number;}){
   }
 
   function fall(row: number, col: number){
-    const nextCells = [...cells];
+    const nextCells = cells.map(row=>[...row]);
     const neighborCells = neighbors(row, col);
     
     nextCells[row][col] = 0;
@@ -71,7 +71,7 @@ export default function SandGrid({size} : {size: number;}){
   }
 
   function activateCell(row: number, col: number){
-    const nextCells = [...cells];
+    const nextCells = cells.map(row=>[...row]);
     nextCells[row][col] = 1;
     setCells(nextCells);
   }
