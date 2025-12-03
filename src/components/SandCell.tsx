@@ -6,12 +6,12 @@ import {
 } from 'react';
 
 interface SandCellProps{
-  state: boolean;
+  state: number;
   row: number;
   col: number;
-  canFall: (row, col) => number;
-  fall: (row, col) => void;
-  onClick: (row, col) => void;
+  canFall: (row: number, col: number) => boolean;
+  fall: (row: number, col: number) => void;
+  onClick: (row: number, col: number) => void;
 }
 
 export default function SandCell({

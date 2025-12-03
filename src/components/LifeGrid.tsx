@@ -81,14 +81,14 @@ export default function LifeGrid(
       if (r >= 0 && r < cells.length && c >= 0 && c < cells[0].length) {
         neighborCells.push(cells[r][c]);
       } else {
-        neighborCells.push(null);
+        neighborCells.push(-1);
       }
     }
 
     return neighborCells;
   }
 
-  function activateCell(row, col){
+  function activateCell(row: number, col: number){
     if(play) return;
     const nextCells = [...cells];
     const currentState = nextCells[row][col] 
@@ -128,7 +128,7 @@ interface LifeCellProps{
   row: number;
   col: number;
   state: number;
-  onClick: (row, col) => void;
+  onClick: (row: number, col: number) => void;
 }
 
 function LifeCell(

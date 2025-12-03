@@ -40,21 +40,21 @@ export default function SandGrid({size} : {size: number;}){
       if (r >= 0 && r < cells.length && c >= 0 && c < cells[0].length) {
         neighborCells.push(cells[r][c]);
       } else {
-        neighborCells.push(null);
+        neighborCells.push(-1);
       }
     }
 
     return neighborCells;
   }
 
-  function canFall(row, col){
+  function canFall(row: number, col: number): boolean{
     const neighborCells = neighbors(row, col);
     return neighborCells[3] === 0 ||
            neighborCells[4] === 0 ||
            neighborCells[5] === 0;
   }
 
-  function fall(row, col){
+  function fall(row: number, col: number){
     const nextCells = [...cells];
     const neighborCells = neighbors(row, col);
     
@@ -70,7 +70,7 @@ export default function SandGrid({size} : {size: number;}){
     setCells(nextCells);
   }
 
-  function activateCell(row, col){
+  function activateCell(row: number, col: number){
     const nextCells = [...cells];
     nextCells[row][col] = 1;
     setCells(nextCells);
